@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejemplo de Interacción con Vue 3 CDN</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        .card { border: 1px solid #ccc; padding: 15px; border-radius: 8px; margin-top: 20px; }
+        input { padding: 8px; border-radius: 4px; border: 1px solid #ddd; width: 80%; }
+        button { padding: 10px 15px; background-color: #42b983; color: white; border: none; border-radius: 4px; cursor: pointer; margin-top: 10px; }
+        button:hover { background-color: #33a06a; }
+    </style>
+</head>
+<body>
+
+    <div id="app">
+        <h1>Demostración de Reactividad en Vue</h1>
+
+        <div class="card">
+            <h3>Entrada de Texto Dinámica (`v-model`)</h3>
+            <input type="text" v-model="nombreUsuario" placeholder="Escribe tu nombre">
+            <p>¡Hola, <strong>{{ nombreUsuario }}</strong>! Tu nombre se actualiza al instante.</p>
+        </div>
+
+        <div class="card">
+            <h3>Contador de Interacciones (`@click`)</h3>
+            <button @click="incrementarContador">
+                Clickeado {{ contador }} veces
+            </button>
+            <p v-if="contador > 0">Sigue interactuando con Vue.</p>
+        </div>
+    </div>
+
+    <script>
+        // Define el objeto de configuración de la aplicación
+        const App = {
+            // data(): Define el estado (los datos) de la aplicación. Son reactivos.
+            data() {
+                return {
+                    nombreUsuario: 'Invitado', // Texto inicial
+                    contador: 0                 // Contador inicial
+                }
+            },
+            // methods: Define las funciones que se pueden llamar por eventos.
+            methods: {
+                incrementarContador() {
+                    // 'this' apunta a la instancia de Vue.
+                    this.contador += 1;
+                }
+            }
+        }
+
+        // 4. Inicia (crea) la aplicación y la monta en el DOM.
+        Vue.createApp(App).mount('#app')
+    </script>
+
+</body>
+</html>
